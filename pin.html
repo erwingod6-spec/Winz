@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PIN Login - VulnWeb</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>PIN LOGIN</h1>
+    <p class="subtitle">Masukkan PIN 4-digit</p>
+
+    <form id="pinForm">
+        <input type="text" id="pin" name="pin" placeholder="• • • •" maxlength="4"
+               pattern="[0-9]{4}" inputmode="numeric" required autocomplete="off">
+        <button type="submit">LOGIN</button>
+    </form>
+
+    <div id="result"></div>
+
+    <p class="note">Hint: PIN 4-digit. Test brute force pakai APK lu.</p>
+</div>
+
+<script src="pin.js"></script>
+</body>
+</html>
